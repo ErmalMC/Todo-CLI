@@ -12,32 +12,16 @@ public class Task {
         this.status = status;
     }
 
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
-
     @Override
     public String toString() {
         return ID + " " + status + " " + description;
+    }
+
+    public static Task fromString(String line) {
+        String[] parts = line.split(",");
+        int id = Integer.parseInt(parts[0]);
+        String description = parts[1];
+        boolean status = Boolean.parseBoolean(parts[2]);
+        return new Task(id, description, status);
     }
 }
