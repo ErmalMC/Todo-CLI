@@ -13,18 +13,39 @@ public class TaskManager {
         tasks.add(task);
     }
 
-    public void deleteTask(Task task) {
-        tasks.remove(task);
+    public void removeTask(int id) {
+        tasks.removeIf(task -> task.getID() == id);
+        System.out.println("Task removed!");
     }
 
-    public void updateTask(Task task, boolean status) {
-        task.setStatus(status);
+    public void markDone(int id) {
+        for (Task task : tasks) {
+            if (task.getID() == id) {
+                task.setStatus(true);
+                return;
+            }
+        }
+        System.out.println("No task found with ID " + id );
     }
 
     public void showAllTasks() {
         for (Task task : tasks) {
             System.out.println(task);
         }
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
+    public void saveToFile() {
+
+
+    }
+
+    public void loadFromFile() {
+
+
     }
 
 

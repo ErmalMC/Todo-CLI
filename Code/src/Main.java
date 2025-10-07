@@ -14,22 +14,42 @@ public class Main {
         System.out.println("5. exit");
 
         while (true) {
-            System.out.println("\n");
             String input = scanner.nextLine();
             String[] parts = input.split(" ",2);
             String command = parts[0].toLowerCase();
 
             switch(command){
                 case "add":
+                    String  description = parts[1];
+                    int newID = manager.getTasks().size()+1;
+                    manager.addTask(new Task(newID,description,false));
+                    manager.saveToFile();
                     break;
                 case "list":
+                    manager.showAllTasks();
                     break;
                 case "done":
+                    if (parts.length < 2) {
+                        System.out.println("Usage: done <id>");
+                        break;
+                    }
+                    int doneID = Integer.parseInt(parts[1]);
+                    manager.markDone(doneID);
+                    manager.saveToFile();
                     break;
                 case "remove":
+                    if (parts.length < 2) {
+                        System.out.println("Usage: remove <id>");
+                        break;
+                    }
+                    int removeID = Integer.parseInt(parts[1]);
+                    manager.removeTask(removeID);
+                    manager.saveToFile();
                     break;
                 case "exit":
-                    break;
+                    manager.saveToFile();
+                    System.out.println("File Saved! Exiting Program");
+                    return;
                 default:
                     System.out.println("Invalid Command");
             }

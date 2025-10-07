@@ -16,9 +16,22 @@ public class Task {
         this.status = status;
     }
 
+    public int getID() {
+        return ID;
+    }
+
     @Override
     public String toString() {
-        return ID + " " + status + " " + description;
+        StringBuilder sb=new StringBuilder();
+        sb.append(ID).append(".");
+
+        if(status == true) {
+            sb.append(" [x] ");
+        }else{
+            sb.append(" [] ");
+        }
+        sb.append(description);
+        return sb.toString();
     }
 
     public static Task fromString(String line) {
