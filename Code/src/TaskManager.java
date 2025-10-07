@@ -13,6 +13,14 @@ public class TaskManager {
         tasks.add(task);
     }
 
+    public void deleteTask(Task task) {
+        tasks.remove(task);
+    }
+
+    public void updateTask(Task task, boolean status) {
+        task.setStatus(status);
+    }
+
     public void showAllTasks() {
         for (Task task : tasks) {
             System.out.println(task);

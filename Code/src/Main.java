@@ -5,6 +5,11 @@ public class Main {
 
         TaskManager manager = new TaskManager();
 
+        System.out.println("Welcome to your To Do Program");
+
+        while (true) {
+
+        }
 
     }
 }

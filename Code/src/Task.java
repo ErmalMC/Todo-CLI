@@ -12,6 +12,10 @@ public class Task {
         this.status = status;
     }
 
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return ID + " " + status + " " + description;
