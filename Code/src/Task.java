@@ -35,13 +35,13 @@ public class Task {
     }
 
     public static Task fromString(String line) {
-        String[] parts = line.split(" ");
+        String[] parts = line.split(" ",3);
         int id = Integer.parseInt(parts[0]);
-       // System.out.println(id);
-        boolean status = Boolean.parseBoolean(parts[1]);
+        boolean status = false;
         String description = parts[2];
-        //System.out.println(description);
-        //System.out.println(status);
+        if(parts[1].equals("[x]")){
+            status = true;
+        }
         return new Task(id, description, status);
     }
 }
