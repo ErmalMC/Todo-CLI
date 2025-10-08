@@ -1,3 +1,5 @@
+import java.io.*;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -39,12 +41,36 @@ public class TaskManager {
     }
 
     public void saveToFile() {
+        PrintWriter printWriter = null;
+        try {
+            printWriter = new PrintWriter(new FileOutputStream("tasks.txt"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
+        for (Task task : tasks) {
+            printWriter.println(task);
+        }
+        printWriter.close();
 
     }
 
     public void loadFromFile() {
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(new FileInputStream("tasks.txt"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            //System.out.println(Task.fromString(line));
+            Task task = Task.fromString(line);
+            //System.out.println(task);
+            tasks.add(task);
+        }
+        scanner.close();
 
     }
 

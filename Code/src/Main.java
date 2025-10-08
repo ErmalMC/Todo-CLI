@@ -5,6 +5,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         TaskManager manager = new TaskManager();
 
+        manager.loadFromFile();
+
         System.out.println("Welcome to your To Do Program");
         System.out.println("Available Commands:");
         System.out.println("1. add <description>");

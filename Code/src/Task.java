@@ -23,7 +23,7 @@ public class Task {
     @Override
     public String toString() {
         StringBuilder sb=new StringBuilder();
-        sb.append(ID).append(".");
+        sb.append(ID);
 
         if(status == true) {
             sb.append(" [x] ");
@@ -35,10 +35,13 @@ public class Task {
     }
 
     public static Task fromString(String line) {
-        String[] parts = line.split(",");
+        String[] parts = line.split(" ");
         int id = Integer.parseInt(parts[0]);
-        String description = parts[1];
-        boolean status = Boolean.parseBoolean(parts[2]);
+       // System.out.println(id);
+        boolean status = Boolean.parseBoolean(parts[1]);
+        String description = parts[2];
+        //System.out.println(description);
+        //System.out.println(status);
         return new Task(id, description, status);
     }
 }
