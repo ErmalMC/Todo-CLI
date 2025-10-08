@@ -47,36 +47,46 @@ public class TaskManager {
     }
 
     public void saveToFile() {
-        PrintWriter printWriter = null;
-        try {
-            printWriter = new PrintWriter(new FileOutputStream("tasks.txt"));
+        String basePath = System.getProperty("user.dir");
+        File file = new File(basePath, "tasks.txt");
+
+        if (!file.exists() && basePath.endsWith("Todo-CLI")) {
+            file = new File(basePath + File.separator + "Code", "tasks.txt");
+        }
+
+        try (PrintWriter printWriter = new PrintWriter(new FileOutputStream(file))) {
+            for (Task task : tasks) {
+                printWriter.println(task);
+            }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Cannot write to file: " + file.getAbsolutePath(), e);
         }
-
-        for (Task task : tasks) {
-            printWriter.println(task);
-        }
-        printWriter.close();
-
     }
 
     public void loadFromFile() {
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(new FileInputStream("tasks.txt"));
+        String basePath = System.getProperty("user.dir");
+        File file = new File(basePath, "tasks.txt");
+
+        if (!file.exists() && basePath.endsWith("Todo-CLI")) {
+            file = new File(basePath + File.separator + "Code", "tasks.txt");
+        }
+
+        if (!file.exists()) {
+            System.out.println("No existing tasks file found — starting fresh.");
+            return;
+        }
+
+        try (Scanner scanner = new Scanner(new FileInputStream(file))) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                Task task = Task.fromString(line);
+                tasks.add(task);
+            }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Cannot read file: " + file.getAbsolutePath(), e);
         }
-
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            Task task = Task.fromString(line);
-            tasks.add(task);
-        }
-        scanner.close();
-
     }
+
 
 
 }
