@@ -46,6 +46,7 @@ public class Main {
                     }
                     int removeID = Integer.parseInt(parts[1]);
                     manager.removeTask(removeID);
+                    manager.SortTasks();
                     manager.saveToFile();
                     break;
                 case "exit":

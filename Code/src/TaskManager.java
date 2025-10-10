@@ -1,6 +1,7 @@
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class TaskManager {
@@ -87,6 +88,12 @@ public class TaskManager {
         }
     }
 
-
+    public void SortTasks(){
+       for (int i = 0; i < tasks.size(); i++) {
+           if(tasks.get(i).getID() != i+1){
+               tasks.get(i).setID(i+1);
+           }
+       }
+    }
 
 }
