@@ -13,7 +13,8 @@ public class Main {
         System.out.println("2. list");
         System.out.println("3. done <task number>");
         System.out.println("4. remove <task number>");
-        System.out.println("5. exit");
+        System.out.println("5. clear tasks");
+        System.out.println("6. exit");
 
         while (true) {
             String input = scanner.nextLine();
@@ -47,6 +48,10 @@ public class Main {
                     int removeID = Integer.parseInt(parts[1]);
                     manager.removeTask(removeID);
                     manager.SortTasks();
+                    manager.saveToFile();
+                    break;
+                case "clear":
+                    manager.clearAllTasks();
                     manager.saveToFile();
                     break;
                 case "exit":

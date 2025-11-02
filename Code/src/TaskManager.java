@@ -43,6 +43,11 @@ public class TaskManager {
         }
     }
 
+    public void clearAllTasks() {
+        tasks.removeAll(getTasks());
+        System.out.println("All tasks have been cleared");
+    }
+
     public ArrayList<Task> getTasks() {
         return tasks;
     }
